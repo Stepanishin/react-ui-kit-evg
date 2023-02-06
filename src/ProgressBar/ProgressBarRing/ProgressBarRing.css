@@ -1,0 +1,18 @@
+.circle-container {
+  width: max-content;
+}
+
+.circle-wrap {
+  transform: rotate(-90deg);
+}
+
+.circle-container__background {
+  fill: none;
+}
+
+.circle-container__progress {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-linecap: round;
+}
