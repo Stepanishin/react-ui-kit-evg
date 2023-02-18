@@ -11,8 +11,8 @@ const Template: ComponentStory<typeof ProgressBarRing> = (args) => (
   <ProgressBarRing {...args} />
 );
 
-export const GreenProgressBar = Template.bind({});
-GreenProgressBar.args = {
+export const GreenProgressBarRing = Template.bind({});
+GreenProgressBarRing.args = {
   percent: 75,
   colorFill: "RGB(0,219,0)",
   colorBg: "RGBA(0,219,0,0.4)",
