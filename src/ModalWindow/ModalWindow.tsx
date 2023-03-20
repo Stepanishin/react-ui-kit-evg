@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  isCloseBtn?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  isCloseBtn,
+}) => {
   const [modalState, setModalState] = useState<boolean>(isOpen);
 
-  const closeModal = () => {
-    setModalState(false);
+  useEffect(() => {
+    setModalState(isOpen);
+  }, [isOpen]);
+
+  const closeModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
     onClose();
   };
 
@@ -20,33 +30,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       {modalState && (
         <div className="modal">
           <div className="modal-overlay" onClick={closeModal}></div>
-          <div className="modal-body">{children}</div>
+          <div className="modal-content">
+            {isCloseBtn && (
+              <div className="modal-header">
+                <button className="modal-close" onClick={closeModal}>
+                  X
+                </button>
+              </div>
+            )}
+            <div className="modal-body">{children}</div>
+          </div>
         </div>
       )}
     </>
   );
 };
-
-const App: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  return (
-    <div className="app">
-      <button onClick={handleOpenModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <h2>Modal Content</h2>
-        <p>This is some content inside the modal window.</p>
-      </Modal>
-    </div>
-  );
-};
-
-export default App;
