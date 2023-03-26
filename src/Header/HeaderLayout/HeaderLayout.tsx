@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { useState, FC } from "react";
+import "./HeaderLayout.css";
 
 type LinkProps = {
   label: string;
@@ -7,9 +8,10 @@ type LinkProps = {
 
 type HeaderLayoutProps = {
   links: LinkProps[];
+  children?: React.ReactNode;
 };
 
-const HeaderLayout: FC<HeaderLayoutProps> = ({ links }) => {
+const HeaderLayout: FC<HeaderLayoutProps> = ({ links, children }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -39,10 +41,8 @@ const HeaderLayout: FC<HeaderLayoutProps> = ({ links }) => {
   return (
     <header>
       <div className="container">
+        <div className="logo">{children}</div>
         {menuButton}
-        <div className="logo">
-          <h1>My Website</h1>
-        </div>
         {navLinks}
       </div>
     </header>

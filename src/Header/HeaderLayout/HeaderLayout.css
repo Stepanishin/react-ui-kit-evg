@@ -9,6 +9,8 @@
 
 .logo h1 {
   margin: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .nav-links {
@@ -46,7 +48,7 @@
 }
 
 .menu-icon.active .line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 .line {
@@ -58,25 +60,35 @@
 
 /* медиа-запрос для мобильных устройств */
 @media (max-width: 768px) {
+  body::-webkit-scrollbar {
+    width: 0;
+  }
+
   .container {
     flex-wrap: wrap;
   }
 
   .menu-button {
     display: block;
+    z-index: 10;
   }
 
   .nav-links {
     flex-basis: 100%;
-    order: 2;
+    flex-direction: column;
     height: 0;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
   }
 
   .nav-links.active {
-    height: auto;
-    order: 1;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .nav-links a {
